@@ -31,6 +31,10 @@ SELECT DISTINCT address FROM customers; -- the DISTINCT remove the duplicate
 INSERT customers (customer_id,name,address) VALUE (5,null,"chennai");
 
 
+USE mydb;
+INSERT shop(id,kdept,kname,dept,name) VALUE (1,"computer","jai","dept","jai");
+SELECT * FROM shop;
+
 
 
 

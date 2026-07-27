@@ -70,9 +70,13 @@ Whether you're **preparing for technical interviews**, **learning database funda
 MySql-Programs/
 │
 ├── 📄 customer-table-creation.sql    # Customer database with CRUD & SELECT operations
+├── 📄 joining-multi-table.sql        # Multi-table JOIN across databases
+├── 📄 joins.sql                      # JOIN queries — single & cross-database
+├── 📄 limit.sql                      # LIMIT clause for restricting result sets
 ├── 📄 new-table-creation.sql         # Extended customer table with NULL handling
 ├── 📄 new-table-creation1.sql        # Multi-database programs (E-commerce, Joins, Subqueries)
 ├── 📄 order-table-creation.sql       # Orders table with foreign key & JOIN queries
+├── 📄 sortOrder.sql                  # ORDER BY with ASC, DESC & multi-column sorting
 ├── 📄 task-one.sql                   # Practice task — computed columns & aliases
 ├── 📄 where.sql                      # Comprehensive WHERE clause & REGEXP patterns
 └── 📄 README.md                      # You are here! 👈
@@ -147,7 +151,70 @@ JOIN orders o ON c.customer_id = o.customer_id;
 
 ---
 
-### 5️⃣ `task-one.sql`
+### 5️⃣ `joins.sql`
+> **Database:** `mysqllearning` / `mydb` &nbsp; | &nbsp; **Lines:** 14
+
+Demonstrates various **JOIN** techniques:
+- Basic `JOIN` with `WHERE` and `ON` syntax
+- Selecting specific columns from joined tables
+- **Cross-database JOINs** — joining `mydb.shop` with `mysqllearning.customers`
+
+```sql
+-- Example: Cross-database JOIN
+SELECT * FROM shop JOIN mysqllearning.customers
+WHERE customers.name = shop.name;
+```
+
+---
+
+### 6️⃣ `joining-multi-table.sql`
+> **Database:** `mysqllearning` / `mydb` &nbsp; | &nbsp; **Lines:** 5
+
+A concise script showcasing **multi-table JOINs** across databases:
+- Chaining multiple `JOIN` clauses in a single query
+- Combining `customers`, `orders`, and `mydb.shop` tables
+- Using column aliases for readability
+
+```sql
+-- Example: Three-table JOIN across two databases
+SELECT o.order_no, c.name, c.address,
+       sh.name AS "Shop name", sh.dept AS "Shop Dept"
+FROM customers c
+  JOIN orders o ON o.customer_id = c.customer_id
+  JOIN mydb.shop sh WHERE sh.name = c.name;
+```
+
+---
+
+### 7️⃣ `sortOrder.sql`
+> **Database:** `mysqllearning` &nbsp; | &nbsp; **Lines:** 12
+
+Covers **ORDER BY** sorting in depth:
+- Single-column sorting (`ASC` / `DESC`)
+- **Multi-column sorting** — primary and secondary sort keys
+- Behavior when duplicate values exist in the primary sort column
+
+```sql
+-- Example: Multi-column sort with mixed directions
+SELECT * FROM customers ORDER BY name DESC, address ASC;
+```
+
+---
+
+### 8️⃣ `limit.sql`
+> **Database:** `mysqllearning` &nbsp; | &nbsp; **Lines:** 3
+
+A quick reference for the **LIMIT** clause:
+- Restricting the number of rows returned by a query
+
+```sql
+-- Example: Return only the first 2 rows
+SELECT * FROM customers LIMIT 2;
+```
+
+---
+
+### 9️⃣ `task-one.sql`
 > **Database:** `mySqlLearning` &nbsp; | &nbsp; **Lines:** 5
 
 A practice task demonstrating:
@@ -162,7 +229,7 @@ FROM customers;
 
 ---
 
-### 6️⃣ `where.sql`
+### 🔟 `where.sql`
 > **Database:** `mySqlLearning` &nbsp; | &nbsp; **Lines:** 35
 
 A complete reference for **data filtering** techniques:
@@ -199,13 +266,15 @@ SELECT * FROM customers WHERE name REGEXP "j[a]";
 │   🟢 Basics     │   🟡 Intermediate │   🔴 Advanced             │
 ├─────────────────┼───────────────────┼───────────────────────────┤
 │ CREATE DATABASE │ ALTER TABLE       │ LEFT / RIGHT JOINs        │
-│ CREATE TABLE    │ PRIMARY KEY       │ Subqueries (Nested)       │
-│ INSERT INTO     │ FOREIGN KEY       │ REGEXP Patterns           │
-│ SELECT          │ JOIN              │ GROUP BY + HAVING         │
-│ UPDATE          │ LIKE              │ Aggregate Functions       │
-│ DELETE          │ IN / BETWEEN      │ AUTO_INCREMENT Management │
-│ WHERE Clause    │ DISTINCT          │ Computed Columns          │
-│ AND / OR / NOT  │ NULL Handling     │ Multi-table Relationships │
+│ CREATE TABLE    │ PRIMARY KEY       │ Multi-table JOINs         │
+│ INSERT INTO     │ FOREIGN KEY       │ Cross-database JOINs      │
+│ SELECT          │ JOIN              │ Subqueries (Nested)       │
+│ UPDATE          │ ORDER BY (multi)  │ REGEXP Patterns           │
+│ DELETE          │ LIKE              │ GROUP BY + HAVING         │
+│ WHERE Clause    │ IN / BETWEEN      │ Aggregate Functions       │
+│ AND / OR / NOT  │ DISTINCT          │ AUTO_INCREMENT Management │
+│ LIMIT           │ NULL Handling     │ Computed Columns          │
+│ ORDER BY        │ Column Aliases    │ Multi-table Relationships │
 └─────────────────┴───────────────────┴───────────────────────────┘
 ```
 

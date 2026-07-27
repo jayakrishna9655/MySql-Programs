@@ -137,16 +137,16 @@ right join country ON city.CountryCode = country.Code;
 create database extension;
 DROP DATABASE extention;
 
-use extension
+use extension;
 
-select * from leads
+select * from leads;
 
 show tables;
 
 
 
 create database programs;
-use programs
+use programs;
 CREATE TABLE employee_details (
     id INT PRIMARY KEY,
     mobile_no VARCHAR(15),
@@ -175,14 +175,14 @@ INSERT INTO employee_details (id, mobile_no, dependent, salary) VALUES
 (19, '9456789032', 'Web Developer', 28000),
 (20, '9567890143', 'Technical Support Engineer', 39000);
 
-select * from employee_details
+select * from employee_details;
 select * from employee_details where id=1
 where salary > (select max(salary) from employee_details);
-select * from employee_details where salary > (select avg(salary)  from employee_details)
-select * from employee_details where dependent like 'f%'
-select sum(salary) from employee_details
+select * from employee_details where salary > (select avg(salary)  from employee_details);
+select * from employee_details where dependent like 'f%';
+select sum(salary) from employee_details;
 
-select * from employee_details where having sum(salary)>10000 ;
+select * from employee_details where sum(salary)>10000 ;
 SELECT SUM(salary) FROM employee_details HAVING SUM(salary) = 10000;
 
 
@@ -197,10 +197,10 @@ personID int,
 city varchar(200),
 state varchar(200)
 );
-insert into person(person,lastName,firstName) value (1,'krishns','jai')
+insert into person(person,lastName,firstName) value (1,'krishns','jai');
 insert into address(addressID,personID,city,state) value(1,'chennai','tamilNadu');
-update address set personID=1 where addressID=1
-select * from address
+update address set personID=1 where addressID=1;
+select * from address;
 SELECT 
     Person.firstName,
     Person.lastName,
@@ -211,12 +211,12 @@ right JOIN Address
 ON Person.person = Address.personId;
 
 create database warehouse_db;
-use warehouse_db
+use warehouse_db;
 
 
 create database springEcomDatas;
 
-questionuse springEcomDatas
+-- questionuse springEcomDatas
 
 INSERT INTO product 
 (name, description, brand, price, category, release_date, available, quantity)
@@ -235,9 +235,9 @@ use SpringSecurityUserDatas;
 select * from Users;
 
 
-create database microQuestiondb 
-use microQuestiondb
-select * from question
+create database microQuestiondb ;
+use microQuestiondb;
+select * from question;
 INSERT INTO question 
 (question_title, option1, option2, option3, option4, right_answer, difficultylevel, category)
 VALUES 

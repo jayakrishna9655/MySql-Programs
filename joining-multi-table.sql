@@ -8,3 +8,7 @@ SELECT * FROM customers;
 SELECT * FROM orders;
 
 SELECT * FROM customers c JOIN orders o ON o.customer_id = c.customer_id AND  o.order_id = c.customer_id;
+
+SELECT c.customer_id ,c.name , c.address,o.order_no,o.order_dec,os.status 
+FROM customers c JOIN orders o ON o.customer_id = c.customer_id 
+                 JOIN orderStatus os ON os.orderstatus_id = o.orderstatus_id;
